@@ -19,6 +19,7 @@
     settings.PermitRootLogin = "no";
 		settings.PasswordAuthentication = false;
   };
+  networking.firewall.allowedTCPPorts = [ 22 ];
 
 	# Enable mDNS for `hostname.local` addresses
 	services.avahi.enable = true;
@@ -32,8 +33,8 @@
   users.users.admin = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    hashedPasswordFile = ./secrets/admin_passwd;
-    openssh.authorizedKeys.keys = ["ssh-ed25518 AAAAC3NzaC1lZDI1NTE5AAAAINhKih1JggOpHz14rogkhKIEuICzLrx8dxnOyjg8bDqI"];
+    hashedPassword = lib.fileContents "/run/secrets/admin_passwd";
+    openssh.authorizedKeys.keys = [lib.fileContents "/run/secrets/ssh_server_pub"];
   };
 	security.sudo.wheelNeedsPassword = false;
 
