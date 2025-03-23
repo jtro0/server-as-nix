@@ -1,14 +1,22 @@
 { config, lib, pkgs, ... }:
 
 {
-  # Enable docker
-  services.docker.enable = true;
-
   # Home Assistant service configuration
   services.home-assistant = {
     enable = true;
     package = pkgs.home-assistant;
     configDir = "/svr/homeassistant";
+    config = {
+      # Minimal required configuration
+      homeassistant = {
+        name = "Home";
+        unit_system = "metric";
+        time_zone = "UTC";
+      };
+      # Add more configuration as needed
+      http = {};
+      default_config = {};
+    };
   };
 
   # Docker containers
