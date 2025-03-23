@@ -33,8 +33,8 @@
   users.users.admin = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    hashedPassword = lib.fileContents "/run/secrets/admin_passwd";
-    openssh.authorizedKeys.keys = [ "${lib.fileContents "/run/secrets/ssh_server_pub"}" ];
+    hashedPassword = lib.fileContents "/var/lib/secrets/admin_passwd";
+    openssh.authorizedKeys.keys = [ "${lib.fileContents "/var/lib/secrets/ssh_server_pub"}" ];
   };
 	security.sudo.wheelNeedsPassword = false;
 
@@ -43,8 +43,7 @@
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Enable tailscale
-    services.tailscale = {
-        enable = true;
-        authKeyFile = "/run/secrets/tailscale-authkey";
-    };
+  services.tailscale = {
+    enable = true;
+  };
 }
