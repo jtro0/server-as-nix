@@ -47,6 +47,8 @@
             ./machines/base.nix 
             ./machines/smarthome.nix
             ./modules/common.nix
+            ./modules/docker/default.nix
+            ./modules/docker/smarthome.nix
             nixos-generators.nixosModules.proxmox
             {
               networking.hostName = "smarthome";
@@ -64,7 +66,10 @@
         
         smarthome-proxmox = mkSystem {
           hostname = "smarthome";
-          modules = [ ./machines/base.nix ./machines/smarthome.nix ];
+          modules = [ 
+            ./machines/base.nix 
+            ./machines/smarthome.nix
+          ];
         };
       };
     };
