@@ -22,12 +22,12 @@
   networking.firewall.allowedTCPPorts = [ 22 ];
 
 	# Enable mDNS for `hostname.local` addresses
-	services.avahi.enable = true;
-	services.avahi.nssmdns4 = true;
-	services.avahi.publish = {
-		enable = true;
-		addresses = true;
-	};
+	# services.avahi.enable = true;
+	# services.avahi.nssmdns4 = true;
+	# services.avahi.publish = {
+	# 	enable = true;
+	# 	addresses = true;
+	# };
 
   # Create a default user
   users.users.admin = {
