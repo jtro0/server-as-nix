@@ -34,7 +34,7 @@
     isNormalUser = true;
     extraGroups = [ "wheel" ];
     hashedPassword = lib.fileContents "/run/secrets/admin_passwd";
-    openssh.authorizedKeys.keys = [lib.fileContents "/run/secrets/ssh_server_pub"];
+    openssh.authorizedKeys.keys = [ "${lib.fileContents "/run/secrets/ssh_server_pub"}" ];
   };
 	security.sudo.wheelNeedsPassword = false;
 
