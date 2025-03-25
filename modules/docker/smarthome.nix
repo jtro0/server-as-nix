@@ -1,28 +1,17 @@
 { config, lib, pkgs, ... }:
 
 {
-  # Home Assistant service configuration
-  services.home-assistant = {
-    enable = true;
-    package = pkgs.home-assistant;
-    configDir = "/svr/homeassistant";
-    config = {
-      # Minimal required configuration
-      homeassistant = {
-        name = "Home";
-        unit_system = "metric";
-        time_zone = "UTC";
-      };
-      # Add more configuration as needed
-      http = {};
-      default_config = {};
-    };
-  };
-
   # Docker containers
   virtualisation.oci-containers = {
     backend = "docker";
     containers = {
+      # Home Assistant
+      homeassistant = {
+        image = "homeassistant/home-assistant:stable";
+        ports = [ "8123:8123" ];
+        volumes = [ "/srv/homeassistant:/config" ];
+        restart = "unless-stopped";
+      };
       # Homebridge for HomeKit integration
       homebridge = {
         image = "oznu/homebridge";
